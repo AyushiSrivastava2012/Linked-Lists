@@ -36,6 +36,8 @@ struct node* insertion(struct node* start,int data, int n){
 struct node* segregate(struct node* head){
 	queue<int>even,odd;
 	struct node *tmp=head;
+	if(head==NULL)
+	return;
 	while(tmp!= NULL){
 		if(tmp->data %2==0)
 		even.push(tmp->data);

@@ -1,0 +1,77 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct node{
+	int data;
+	struct node* next=NULL;
+};
+void printlist(struct node* n){
+	while(n!=NULL){
+		cout<<n->data<<" ";
+		n=n->next;
+	}
+}
+struct node* insertion(struct node* start,int data, int n){
+	if(start==NULL)
+	return NULL;
+	struct node* tmp=(struct node*)malloc(sizeof(struct node));
+	tmp->data=data;
+	if(n==1){
+		tmp->next=start;
+		start=tmp;
+	}
+	else{
+		int i=1;
+		struct node* tmp2=start;
+		while(i<n-1){
+			i++;
+			tmp2=tmp2->next;
+		}
+		tmp->next=tmp2->next;
+		tmp2->next=tmp;
+	}
+	return start;
+}
+//----------------------------------------------------------------------
+struct node* segregate(struct node* head){
+	queue<int>even,odd;
+	struct node *tmp=head;
+	while(tmp!= NULL){
+		if(tmp->data %2==0)
+		even.push(tmp->data);
+		else
+		odd.push(tmp->data);
+		tmp=tmp->next;
+	}
+	tmp=head;
+	while(!even.empty()){
+		tmp->data=even.front();
+		even.pop();
+		tmp=tmp->next;
+	}
+	while(!odd.empty()){
+		tmp->data=odd.front();
+		odd.pop();
+		tmp=tmp->next;
+	}
+	return head;
+}
+int main() {
+	struct node* head=(struct node*)malloc(sizeof(struct node));
+	struct node* second=(struct node*)malloc(sizeof(struct node));
+	struct node* third=(struct node*)malloc(sizeof(struct node));
+	head->data=1;
+	head->next=second;
+	second->data=2;
+	second->next=third;
+	third->data=3;
+	third->next=NULL;
+	head=insertion(head,4,4);
+	head=insertion(head,5,5);
+	head=insertion(head,6,6);
+	printlist(head);
+	cout<<endl;
+	head=segregate(head);
+	printlist(head);
+	return 0;
+}

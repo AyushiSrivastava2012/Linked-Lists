@@ -12,8 +12,6 @@ void printlist(struct node* n){
 	}
 }
 struct node* insertion(struct node* start,int data, int n){
-	if(start==NULL)
-	return NULL;
 	struct node* tmp=(struct node*)malloc(sizeof(struct node));
 	tmp->data=data;
 	if(n==1){

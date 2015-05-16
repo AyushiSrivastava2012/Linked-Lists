@@ -2,7 +2,7 @@
 using namespace std;
 
 struct node{
-	int data;
+	int data=0;
 	struct node* next=NULL;
 };
 void printlist(struct node* n){
@@ -36,25 +36,19 @@ struct node* insertion(struct node* start,int data, int n){
 void reverseKtimes(struct node* head,int k){
 	stack<int>S;
 	struct node* tmp1=head,*tmp2=head;
-	int j=1,i=1,p=1;
 	while(tmp1!=NULL){
-		i=1;
-		while(i<=k && tmp1!=NULL){
+		int i=0;
+		while(i<k && tmp1!=NULL){
 			S.push(tmp1->data);
 			tmp1=tmp1->next;
 			i++;
-		//	cout<<S.top()<<" ";
 		}
-	//	cout<<endl;
-		 p=1;
-		while(p<=k && tmp2!=NULL){
+		while(i>0 && tmp2!=NULL){
 			tmp2->data=S.top();
 			S.pop();
-		//	cout<<tmp2->data<<" ";
 			tmp2=tmp2->next;
-			p++;
+			i--;
 		}
-		j=j+k;
 	}
 }
 int main() {
@@ -69,7 +63,6 @@ int main() {
 	third->next=NULL;
 	head=insertion(head,4,4);
 	head=insertion(head,5,5);
-	head=insertion(head,6,6);
 	printlist(head);
 	cout<<endl;
 	reverseKtimes(head,3);
